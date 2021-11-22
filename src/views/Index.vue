@@ -70,6 +70,12 @@
 import stationCity from '@/assets/stationCity.json'
 import routeCity from '@/assets/routeCity.json'
 
+function resetHeight () {
+  // reset the body height to that of the inner browser
+  console.log('resize')
+  document.querySelector('.bg-index').style.heigtht = window.innerHeight + 'px'
+}
+
 export default {
   data () {
     return {
@@ -91,6 +97,13 @@ export default {
       const qryStr = JSON.stringify(param)
       this.$router.push(`/map/${qryStr}`)
     }
+  },
+  mounted () {
+    window.addEventListener('resize', resetHeight)
+    resetHeight()
+  },
+  unmounted () {
+    window.removeEventListener('resize', resetHeight)
   }
 }
 </script>

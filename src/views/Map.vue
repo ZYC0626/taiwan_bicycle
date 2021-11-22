@@ -279,6 +279,11 @@ function removeMapMarker () {
   routeMarkerStore = []
   routeLayersStore = []
 }
+function resetHeight () {
+  // reset the body height to that of the inner browser
+  console.log('resize')
+  document.querySelector('.wrap').style.heigtht = window.innerHeight + 'px'
+}
 
 export default {
   components: {},
@@ -624,7 +629,8 @@ export default {
     openStreetMap = $L.map('map', {
       zoomControl: false,
       center: [25.0834397, 121.4570441],
-      zoom: 13
+      zoom: 13,
+      tap: false
     })
     $L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
@@ -645,6 +651,12 @@ export default {
     this.searchType = param.type
     if (this.searchType === 'station') this.getStation()
     else this.getRoute()
+
+    window.addEventListener('resize', resetHeight)
+    resetHeight()
+  },
+  unmounted () {
+    window.removeEventListener('resize', resetHeight)
   }
 }
 </script>
