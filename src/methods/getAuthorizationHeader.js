@@ -1,8 +1,8 @@
 // import axios from 'axios'
 import JsSHA from 'jssha'
 
-const AppID = '0614cbff829f4c189593b90236ef7578'
-const AppKey = 'CItZnkpy_c3YQbXXAZ2i21rrcxM'
+const AppID = process.env.VUE_APP_API_ID // 填入自身的TDX AppID
+const AppKey = process.env.VUE_APP_API_KEY
 
 export default function getAuthorizationHeader (num) {
   const GMTString = new Date().toGMTString()
