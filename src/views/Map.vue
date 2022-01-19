@@ -550,7 +550,7 @@ export default {
         }
       )
         .then((response) => {
-          // console.log(response.data)
+          console.log(response.data)
           response.data.forEach((x) => {
             this.addRelationMarker(x, viewIcon, 'view')
           })
@@ -567,7 +567,7 @@ export default {
         }
       )
         .then((response) => {
-          // console.log(response.data)
+          console.log(response.data)
           response.data.forEach((x) => {
             this.addRelationMarker(x, restaurantIcon, 'restaurant')
           })
@@ -582,11 +582,12 @@ export default {
       marker.addTo(openStreetMap)
         .bindPopup(`
         <div class="station-pop-info">
-          <div class="title">${target.Name}</div>
+          <div class="title">${type === 'view' ? target.ScenicSpotName : target.RestaurantName}</div>
         </div>`)
       target.markerID = marker._leaflet_id
       target.type = type === 'view' ? '景點' : '餐飲'
       target.iconType = type
+      target.Name = type === 'view' ? target.ScenicSpotName : target.RestaurantName
       this.relationList.push(target)
       relationMarkerStore.push(marker)
     },
